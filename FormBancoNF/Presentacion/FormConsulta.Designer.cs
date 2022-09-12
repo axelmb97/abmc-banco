@@ -35,9 +35,8 @@ namespace FormBancoNF.Presentacion
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.cbTipoCuenta = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.colCuentas = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colBaja = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,13 +49,16 @@ namespace FormBancoNF.Presentacion
             this.colApellido,
             this.colNombre,
             this.colDni,
-            this.colId});
-            this.dgvClientes.Location = new System.Drawing.Point(26, 60);
+            this.colId,
+            this.colCuentas,
+            this.colBaja});
+            this.dgvClientes.Location = new System.Drawing.Point(29, 25);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowTemplate.Height = 25;
-            this.dgvClientes.Size = new System.Drawing.Size(295, 166);
+            this.dgvClientes.Size = new System.Drawing.Size(554, 210);
             this.dgvClientes.TabIndex = 19;
+            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
             // colApellido
             // 
@@ -83,62 +85,45 @@ namespace FormBancoNF.Presentacion
             this.colId.ReadOnly = true;
             this.colId.Visible = false;
             // 
-            // btnBuscar
+            // colCuentas
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(256, 35);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(64, 20);
-            this.btnBuscar.TabIndex = 18;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.colCuentas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCuentas.HeaderText = "CUENTAS";
+            this.colCuentas.Name = "colCuentas";
+            this.colCuentas.ReadOnly = true;
+            this.colCuentas.Text = "Ver cuentas";
+            this.colCuentas.UseColumnTextForButtonValue = true;
             // 
-            // cbTipoCuenta
+            // colBaja
             // 
-            this.cbTipoCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoCuenta.FormattingEnabled = true;
-            this.cbTipoCuenta.Location = new System.Drawing.Point(26, 35);
-            this.cbTipoCuenta.Name = "cbTipoCuenta";
-            this.cbTipoCuenta.Size = new System.Drawing.Size(202, 21);
-            this.cbTipoCuenta.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(26, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Tipo cuenta:";
+            this.colBaja.HeaderText = "Acciones";
+            this.colBaja.Name = "colBaja";
+            this.colBaja.ReadOnly = true;
+            this.colBaja.Text = "Dar de baja";
+            this.colBaja.UseColumnTextForButtonValue = true;
             // 
             // FormConsulta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 247);
+            this.ClientSize = new System.Drawing.Size(629, 256);
             this.Controls.Add(this.dgvClientes);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.cbTipoCuenta);
-            this.Controls.Add(this.label5);
             this.Name = "FormConsulta";
             this.Text = "Clientes Actuales";
             this.Load += new System.EventHandler(this.FormConsulta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private DataGridView dgvClientes;
-        private Button btnBuscar;
-        private ComboBox cbTipoCuenta;
-        private Label label5;
         private DataGridViewTextBoxColumn colApellido;
         private DataGridViewTextBoxColumn colNombre;
         private DataGridViewTextBoxColumn colDni;
         private DataGridViewTextBoxColumn colId;
+        private DataGridViewButtonColumn colCuentas;
+        private DataGridViewButtonColumn colBaja;
     }
 }

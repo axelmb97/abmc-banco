@@ -30,35 +30,16 @@ namespace FormBancoNF.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbCliente = new System.Windows.Forms.ComboBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvCuentasCliente = new System.Windows.Forms.DataGridView();
             this.colCbu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSaldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUltMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAccion = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colCodCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccion = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentasCliente)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbCliente
-            // 
-            this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(10, 34);
-            this.cbCliente.Name = "cbCliente";
-            this.cbCliente.Size = new System.Drawing.Size(260, 21);
-            this.cbCliente.TabIndex = 0;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(287, 34);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(64, 20);
-            this.btnBuscar.TabIndex = 2;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // dgvCuentasCliente
             // 
@@ -70,15 +51,16 @@ namespace FormBancoNF.Presentacion
             this.colSaldo,
             this.colUltMov,
             this.colTipoCuenta,
-            this.colAccion,
-            this.colActivo});
-            this.dgvCuentasCliente.Location = new System.Drawing.Point(10, 83);
+            this.colCodCuenta,
+            this.colActivo,
+            this.colAccion});
+            this.dgvCuentasCliente.Location = new System.Drawing.Point(10, 34);
             this.dgvCuentasCliente.Name = "dgvCuentasCliente";
             this.dgvCuentasCliente.ReadOnly = true;
             this.dgvCuentasCliente.RowTemplate.Height = 25;
-            this.dgvCuentasCliente.Size = new System.Drawing.Size(550, 150);
+            this.dgvCuentasCliente.Size = new System.Drawing.Size(550, 199);
             this.dgvCuentasCliente.TabIndex = 31;
-            this.dgvCuentasCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentasCliente_CellContentClick_1);
+            this.dgvCuentasCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentasCliente_CellContentClick);
             // 
             // colCbu
             // 
@@ -105,6 +87,20 @@ namespace FormBancoNF.Presentacion
             this.colTipoCuenta.Name = "colTipoCuenta";
             this.colTipoCuenta.ReadOnly = true;
             // 
+            // colCodCuenta
+            // 
+            this.colCodCuenta.HeaderText = "codigoCuenta";
+            this.colCodCuenta.Name = "colCodCuenta";
+            this.colCodCuenta.ReadOnly = true;
+            this.colCodCuenta.Visible = false;
+            // 
+            // colActivo
+            // 
+            this.colActivo.HeaderText = "activo";
+            this.colActivo.Name = "colActivo";
+            this.colActivo.ReadOnly = true;
+            this.colActivo.Visible = false;
+            // 
             // colAccion
             // 
             this.colAccion.HeaderText = "Acciones";
@@ -115,23 +111,14 @@ namespace FormBancoNF.Presentacion
             this.colAccion.Text = "Dar de baja";
             this.colAccion.UseColumnTextForButtonValue = true;
             // 
-            // colActivo
-            // 
-            this.colActivo.HeaderText = "activo";
-            this.colActivo.Name = "colActivo";
-            this.colActivo.ReadOnly = true;
-            this.colActivo.Visible = false;
-            // 
             // FormBaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 259);
             this.Controls.Add(this.dgvCuentasCliente);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.cbCliente);
             this.Name = "FormBaja";
-            this.Text = "FormBajaCuenta";
+            this.Text = "Cuentas";
             this.Load += new System.EventHandler(this.FormBaja_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentasCliente)).EndInit();
             this.ResumeLayout(false);
@@ -139,15 +126,13 @@ namespace FormBancoNF.Presentacion
         }
 
         #endregion
-
-        private ComboBox cbCliente;
-        private Button btnBuscar;
         private DataGridView dgvCuentasCliente;
         private DataGridViewTextBoxColumn colCbu;
         private DataGridViewTextBoxColumn colSaldo;
         private DataGridViewTextBoxColumn colUltMov;
         private DataGridViewTextBoxColumn colTipoCuenta;
-        private DataGridViewButtonColumn colAccion;
+        private DataGridViewTextBoxColumn colCodCuenta;
         private DataGridViewTextBoxColumn colActivo;
+        private DataGridViewButtonColumn colAccion;
     }
 }

@@ -1,12 +1,16 @@
 CREATE DATABASE CLIENTES_BANCO
 GO
 USE CLIENTES_BANCO
-GO 
+GO
+SET DATEFORMAT DMY
+GO
 CREATE TABLE T_CLIENTES(
 	id_cliente int identity(1,1),
 	nombre varchar(50),
 	apellido varchar(50),
 	dni int,
+	activo bit DEFAULT 'true',
+	fecha_baja datetime,
 	CONSTRAINT pk_clientes PRIMARY KEY (id_cliente)
 )
 CREATE TABLE T_TIPOS_CUENTAS(
@@ -14,20 +18,48 @@ CREATE TABLE T_TIPOS_CUENTAS(
 	nombre varchar(20),
 	CONSTRAINT pk_tipos_cuentas PRIMARY KEY (id_tipo_cuenta)
 )
+-- Ver como hacer mecanismo para generar codigo de cuenta dependiendo el tipo
+-- CC,CS,CA,ME
 CREATE TABLE T_CUENTAS(
+	cod_cuenta int identity(1,1),
 	id_cliente int,
-	cbu varchar(25),
+	cbu varchar(25) not null,
 	saldo decimal(20,2),
 	id_tipo_cuenta int,
 	ultimo_mov varchar(50),
 	activo bit,
-	CONSTRAINT pk_cuentas PRIMARY KEY (cbu,id_cliente),
+	CONSTRAINT pk_cuentas PRIMARY KEY (cod_cuenta),
 	CONSTRAINT fk_cuentas_clientes FOREIGN KEY (id_cliente)
 		REFERENCES T_CLIENTES (id_cliente),
 	CONSTRAINT fk_cuentas_tipos_cuentas FOREIGN KEY (id_tipo_cuenta)
 		REFERENCES T_TIPOS_CUENTAS (id_tipo_cuenta)
 )
+CREATE TABLE T_TIPOS_MOVIMIENTOS(
+	id_tipo_mov int identity(1,1),
+	tipo_mov varchar(100),
+	CONSTRAINT pk_tipos_movimientos PRIMARY KEY (id_tipo_mov)
+)
+CREATE TABLE T_MOVIMIENTOS(
+	cod_movimiento int identity(1,1),
+	cod_cuenta int,
+	id_tipo_mov int,
+	fecha datetime,
+	monto decimal(12,2),
+	descripcion varchar(200),
+	CONSTRAINT pk_movimientos PRIMARY KEY (cod_movimiento),
+	CONSTRAINT fk_movimientos_cuentas FOREIGN KEY (cod_cuenta)
+		REFERENCES T_CUENTAS (cod_cuenta),
+	CONSTRAINT fk_movimientos_tipos_movimientos FOREIGN KEY (id_tipo_mov)
+		REFERENCES T_TIPOS_MOVIMIENTOS (id_tipo_mov)
+)
 GO
+insert into T_TIPOS_MOVIMIENTOS (tipo_mov) VALUES ('DEPOSITO'),
+												('TRASFERENCIA'),
+												('RETIRO'),
+												('COMPRA'),
+												('PAGO DE SERVICIO'),
+												('PAGO DE CREDITO')
+
 insert into T_TIPOS_CUENTAS(nombre) values('CAJA DE AHORRO PESOS'),
 									('CAJA DE AHORRO EN ME'),
 									('CUENTA CORRIENTE'),
@@ -51,16 +83,17 @@ insert into T_CUENTAS(id_cliente,cbu,saldo,id_tipo_cuenta,ultimo_mov,activo)
 		(6,'1236654796548231564875',69874,1,'TRANSFERENCIA','true')
 GO
 CREATE PROCEDURE DATOS_CLIENTES
-	@tipoCuenta int = 1
 AS
-SELECT c.id_cliente,C.nombre,apellido,dni
-	FROM T_CLIENTES C, T_CUENTAS CU
-	WHERE C.id_cliente = CU.id_cliente 
-		and id_tipo_cuenta = @tipoCuenta
-	order by 2,3
+SELECT DISTINCT c.id_cliente,C.nombre,apellido,dni,activo
+	FROM T_CLIENTES C
+	WHERE  activo = 1
+	order by 3,2
 GO
 CREATE PROCEDURE TIPOS_CUENTAS
 AS SELECT * FROM T_TIPOS_CUENTAS
+GO
+CREATE PROCEDURE SP_TIPOS_MOVIMIENTOS
+AS SELECT * FROM T_TIPOS_MOVIMIENTOS
 GO
 CREATE PROCEDURE SP_INSERTAR_MAESTRO_CLIENTE
 	@nombre varchar(50),
@@ -87,14 +120,27 @@ BEGIN
 END
 GO
 CREATE PROCEDURE SP_BAJA_LOGICA_CUENTA
-	@idCliente int,
-	@cbu  varchar(25)
+	@codCuenta int
 AS
 BEGIN
 	UPDATE T_CUENTAS 
 		SET activo = 0
-		where id_cliente = @idCliente and cbu = @cbu  
+		where cod_cuenta = @codCuenta
 END
+GO
+CREATE PROCEDURE SP_BAJA_LOGICA_CLIENTE
+	@idCliente int
+AS
+BEGIN
+	UPDATE T_CUENTAS 
+		set activo = 0
+		where id_cliente = @idCliente
+	UPDATE T_CLIENTES 
+		SET activo = 0,
+		 fecha_baja = GETDATE()
+		where id_cliente = @idCliente
+END
+
 go
 CREATE PROCEDURE SP_CLIENTES
 as
@@ -105,11 +151,11 @@ go
 CREATE PROCEDURE SP_CLIENTES_Y_CUENTAS
 	@idCLiente int
 AS
-SELECT c.id_cliente,cu.cbu,cu.saldo,tc.id_tipo_cuenta,tc.nombre,cu.ultimo_mov,cu.activo
-	FROM T_CLIENTES C, T_CUENTAS CU,T_TIPOS_CUENTAS tc
-	WHERE C.id_cliente = CU.id_cliente  and cu.id_tipo_cuenta = tc.id_tipo_cuenta
+SELECT cu.cod_cuenta,cu.cbu,cu.saldo,tc.nombre,cu.ultimo_mov,cu.activo
+	FROM  T_CUENTAS CU,T_TIPOS_CUENTAS tc
+	WHERE cu.id_tipo_cuenta = tc.id_tipo_cuenta
 	and cu.id_cliente = @idCliente
-	and activo = 1
+	and cu.activo = 1
 GO
 CREATE PROCEDURE SP_REPORTE_CLIENTES_SALDOS
 	@monto decimal(12,2) = 0 
@@ -121,7 +167,7 @@ select  apellido + ' ' + nombre 'Cliente',SUM((
 	END)) 'Total'
 	from t_cuentas cu
 	join T_CLIENTES c on c.id_cliente = cu.id_cliente
-	where activo = 1
+	where c.activo = 1
 	group by apellido + ' ' + nombre
 	having SUM((
 	case 
@@ -134,7 +180,7 @@ AS
 select  apellido + ' ' + nombre 'Cliente', saldo 'Total'
 	from T_CLIENTES c
 	join T_CUENTAS cu on c.id_cliente = cu.id_cliente
-	where id_tipo_cuenta = 2
+	where id_tipo_cuenta = 2 and cu.activo = 1
 
 --select * from T_CUENTAS order by id_cliente
 --select * from T_CUENTAS order by id_cliente
@@ -153,3 +199,5 @@ select  apellido + ' ' + nombre 'Cliente', saldo 'Total'
 --go
 --drop database clientes_banco
 
+--select * from T_CLIENTES
+--select * from T_Cuentas

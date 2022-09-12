@@ -8,6 +8,7 @@ namespace FormBancoNF
 {
     internal class Cuenta
     {
+        private int codCuenta;
         private string cbu;
         private double saldo;
         private string ultimoMov;
@@ -15,19 +16,26 @@ namespace FormBancoNF
         private bool activo;
         public Cuenta()
         {
+            codCuenta = -1;
             cbu = "";
             ultimoMov = "";
             saldo = 0;
             tipo = new TipoCuenta();
             activo = true;
         }
-        public Cuenta(string cbu,double saldo,int tipoCuenta,string nombreCuenta,string ultimoMov)
+        public Cuenta(int codCuenta,string cbu,double saldo,int tipoCuenta,string nombreCuenta,string ultimoMov)
         {
+            this.codCuenta = codCuenta;
             this.cbu = cbu;
             this.saldo = saldo;
             this.ultimoMov = ultimoMov;
             this.tipo = new TipoCuenta(tipoCuenta,nombreCuenta);
             this.activo = true;
+        }
+        public int CodCuenta
+        {
+            get { return codCuenta; }
+            set { codCuenta = value; }
         }
         public string Cbu
         {

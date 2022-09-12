@@ -24,24 +24,25 @@ namespace FormBancoNF.Presentacion
 
         private void FormAlta_Load(object sender, EventArgs e)
         {
-            CargarCombo();
+            CargarCombo("TIPOS_CUENTAS", cbTipoCuenta, "nombre", "id_tipo_cuenta");
+            CargarCombo("SP_TIPOS_MOVIMIENTOS",cbUltimoMov,"tipo_mov","id_tipo_mov");
 
         }
 
         #region PRIVATE METHODS
-        public void CargarCombo()
+        public void CargarCombo(string nombreSP,ComboBox cb,string dMember,string vMember)
         {
-            DataTable tabla = helper.ConsultarSql("TIPOS_CUENTAS");
-            cbTipoCuenta.DataSource = tabla;
-            cbTipoCuenta.ValueMember = "id_tipo_cuenta";
-            cbTipoCuenta.DisplayMember = "nombre";
+            DataTable tabla = helper.ConsultarSql(nombreSP);
+            cb.DataSource = tabla;
+            cb.ValueMember = vMember;
+            cb.DisplayMember = dMember;
         }
 
         private void LimpiarCuenta()
         {
             txtCbu.Text = "";
             txtSaldo.Text = "";
-            txtUltimoMov.Text = "";
+            cbUltimoMov.SelectedValue = 1;
             cbTipoCuenta.SelectedValue = 1;
         }
         private bool Confirmar() => helper.InsertarCliente(cliente);
@@ -127,9 +128,9 @@ namespace FormBancoNF.Presentacion
                 MessageBox.Show("Debe ingresar un saldo valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (txtUltimoMov.Text == "")
+            if (cbUltimoMov.SelectedIndex == -1)
             {
-                MessageBox.Show("Debe ingresar un movimiento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un movimiento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (cbTipoCuenta.Text.Equals(String.Empty))
@@ -151,7 +152,7 @@ namespace FormBancoNF.Presentacion
             Cuenta cuenta = new Cuenta();
             cuenta.Cbu = txtCbu.Text;
             cuenta.Saldo = Convert.ToDouble(txtSaldo.Text);
-            cuenta.UltimoMov = txtUltimoMov.Text;
+            cuenta.UltimoMov = cbUltimoMov.Text;
             cuenta.Tipo.Id = Convert.ToInt32(cbTipoCuenta.SelectedValue);
             cuenta.Tipo.Nombre = cbTipoCuenta.Text;
             cuenta.Activo = true;

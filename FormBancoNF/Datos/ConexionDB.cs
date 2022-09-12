@@ -93,16 +93,39 @@ namespace FormBancoNF
             cnn.Close();
             return tabla;
         }
-        public void BajaLogica(int idCliente,string cbu){
-            //int filas = 0;
+        public int BajaLogica(int codCuenta){
+            int filas = 0;
             cnn.Open();
             cmd = new SqlCommand("SP_BAJA_LOGICA_CUENTA",cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@idCLiente",idCliente);
-            cmd.Parameters.AddWithValue("@cbu",cbu);
-            cmd.ExecuteNonQuery();
+            cmd.Parameters.AddWithValue("@codCuenta",codCuenta);
+            filas = cmd.ExecuteNonQuery();
             cnn.Close();
-            //return filas;
+            return filas;
+        }
+        public int EliminarCuenta(int idCliente) {
+            int filas = 0;
+
+            try
+            {
+                cnn.Open();
+                cmd = new SqlCommand("SP_BAJA_LOGICA_Cliente", cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                filas= cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problemas al borrar cliente.Intente mas tarde");
+                
+            }
+            finally {
+                if (cnn != null && cnn.State == ConnectionState.Open) {
+                    cnn.Close();
+                }
+            }
+
+            return filas;
         }
         public DataTable ReporteAgrupado(string nombreSP,double monto) {
             DataTable tabla = new DataTable();

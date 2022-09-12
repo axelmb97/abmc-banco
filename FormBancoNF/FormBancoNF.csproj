@@ -85,6 +85,7 @@
     <Compile Include="Datos\ConexionDB.cs" />
     <Compile Include="Dominio\Cliente.cs" />
     <Compile Include="Dominio\Cuenta.cs" />
+    <Compile Include="Dominio\Parametro.cs" />
     <Compile Include="Dominio\TipoCuenta.cs" />
     <Compile Include="Presentacion\FormAlta.cs">
       <SubType>Form</SubType>

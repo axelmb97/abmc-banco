@@ -93,11 +93,7 @@ namespace FormBancoNF.Presentacion
             clientesActuales.ShowDialog();
         }
 
-        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormBaja baja = new FormBaja();
-            baja.ShowDialog();
-        }
+        
 
        
         private void clientesConMEToolStripMenuItem_Click(object sender, EventArgs e)

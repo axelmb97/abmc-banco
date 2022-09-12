@@ -50,12 +50,12 @@ namespace FormBancoNF.Presentacion
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gpDatosCuenta = new System.Windows.Forms.GroupBox();
-            this.txtUltimoMov = new System.Windows.Forms.TextBox();
             this.txtSaldo = new System.Windows.Forms.TextBox();
             this.txtCbu = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.cbUltimoMov = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentasCliente)).BeginInit();
             this.gpDatosCliente.SuspendLayout();
             this.gpDatosCuenta.SuspendLayout();
@@ -246,7 +246,7 @@ namespace FormBancoNF.Presentacion
             // 
             // gpDatosCuenta
             // 
-            this.gpDatosCuenta.Controls.Add(this.txtUltimoMov);
+            this.gpDatosCuenta.Controls.Add(this.cbUltimoMov);
             this.gpDatosCuenta.Controls.Add(this.txtSaldo);
             this.gpDatosCuenta.Controls.Add(this.txtCbu);
             this.gpDatosCuenta.Controls.Add(this.label6);
@@ -258,13 +258,6 @@ namespace FormBancoNF.Presentacion
             this.gpDatosCuenta.TabIndex = 35;
             this.gpDatosCuenta.TabStop = false;
             this.gpDatosCuenta.Text = "Datos por cuenta";
-            // 
-            // txtUltimoMov
-            // 
-            this.txtUltimoMov.Location = new System.Drawing.Point(7, 137);
-            this.txtUltimoMov.Name = "txtUltimoMov";
-            this.txtUltimoMov.Size = new System.Drawing.Size(254, 20);
-            this.txtUltimoMov.TabIndex = 32;
             // 
             // txtSaldo
             // 
@@ -306,6 +299,15 @@ namespace FormBancoNF.Presentacion
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 27;
             this.label4.Text = "CBU:";
+            // 
+            // cbUltimoMov
+            // 
+            this.cbUltimoMov.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUltimoMov.FormattingEnabled = true;
+            this.cbUltimoMov.Location = new System.Drawing.Point(10, 144);
+            this.cbUltimoMov.Name = "cbUltimoMov";
+            this.cbUltimoMov.Size = new System.Drawing.Size(251, 21);
+            this.cbUltimoMov.TabIndex = 32;
             // 
             // FormAlta
             // 
@@ -349,7 +351,6 @@ namespace FormBancoNF.Presentacion
         private Label label2;
         private Label label1;
         private GroupBox gpDatosCuenta;
-        private TextBox txtUltimoMov;
         private TextBox txtSaldo;
         private TextBox txtCbu;
         private Label label6;
@@ -361,5 +362,6 @@ namespace FormBancoNF.Presentacion
         private DataGridViewTextBoxColumn colTipoCuenta;
         private DataGridViewButtonColumn colAccion;
         private DataGridViewTextBoxColumn colActivo;
+        private ComboBox cbUltimoMov;
     }
 }

@@ -13,20 +13,23 @@ namespace FormBancoNF
         private string apellido;
         private int dni;
         private List<Cuenta> cuentas;
+        private string fechaBaja;
         public Cliente()
         {
             idCliente = -1;
             nombre = apellido = "";
             dni = 0;
             cuentas = new List<Cuenta>();
+            fechaBaja = DateTime.Now.Date.ToString();
         }
-        public Cliente(int idCliente,string nombre,string apellido,int dni,List<Cuenta> cuentas)
+        public Cliente(int idCliente,string nombre,string apellido,int dni,List<Cuenta> cuentas, string fechaBaja)
         {
             this.idCliente = idCliente;
             this.nombre = nombre;
             this.apellido = apellido;
             this.dni = dni;
             this.cuentas = cuentas;
+            this.fechaBaja = fechaBaja;
         }
         public int IdCliente {
             get { return idCliente; }
@@ -48,6 +51,10 @@ namespace FormBancoNF
         public List<Cuenta> Cuentas {
             
             get { return cuentas; }
+        }
+        public string FechaBaja {
+            get { return fechaBaja; }
+            set { fechaBaja = value; } 
         }
         public override string ToString() {
             return $"{apellido}, {nombre}";

@@ -84,9 +84,15 @@ insert into T_CUENTAS(id_cliente,cbu,saldo,id_tipo_cuenta,ultimo_mov,activo)
 GO
 CREATE PROCEDURE DATOS_CLIENTES
 AS
-SELECT DISTINCT c.id_cliente,C.nombre,apellido,dni,activo
+SELECT DISTINCT c.id_cliente,C.nombre,apellido,dni,activo,fecha_baja
 	FROM T_CLIENTES C
 	WHERE  activo = 1
+	order by 3,2
+GO
+CREATE PROCEDURE DATOS_CLIENTES_Y_BAJAS
+AS
+SELECT DISTINCT c.id_cliente,C.nombre,apellido,dni,activo,fecha_baja
+	FROM T_CLIENTES C
 	order by 3,2
 GO
 CREATE PROCEDURE TIPOS_CUENTAS
@@ -201,3 +207,4 @@ select  apellido + ' ' + nombre 'Cliente', saldo 'Total'
 
 --select * from T_CLIENTES
 --select * from T_Cuentas
+

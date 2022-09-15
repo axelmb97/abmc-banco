@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FormBancoNF
 {
-    internal class TipoCuenta
+    public class TipoCuenta
     {
         private int id;
         private string nombre;

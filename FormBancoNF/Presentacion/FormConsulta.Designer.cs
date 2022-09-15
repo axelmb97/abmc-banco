@@ -70,7 +70,7 @@ namespace FormBancoNF.Presentacion
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(303, 333);
+            this.btnSalir.Location = new System.Drawing.Point(351, 326);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 20;
@@ -80,7 +80,7 @@ namespace FormBancoNF.Presentacion
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(222, 333);
+            this.btnEditar.Location = new System.Drawing.Point(270, 326);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 20;

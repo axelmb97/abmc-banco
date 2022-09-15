@@ -1,4 +1,5 @@
 ﻿
+using FormBancoNF.Negocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,14 @@ namespace FormBancoNF.Presentacion
 {
     public partial class FormBaja : Form
     {
-        private ConexionDB helper;
+        
         private int idCliente;
+        private GestorClientes gestor;
         public FormBaja(int idCliente)
         {
             InitializeComponent();
-            helper = new ConexionDB();
+           
+            gestor = new GestorClientes();
             this.idCliente = idCliente;
         }
         private void FormBaja_Load(object sender, EventArgs e)
@@ -39,7 +42,7 @@ namespace FormBancoNF.Presentacion
         //    cbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
         //}
         private void CargarLista(int idCliente) {
-            DataTable tabla = helper.ConsultarCuentas("SP_CLIENTES_Y_CUENTAS", idCliente);
+            DataTable tabla = gestor.CuentasDeCliente(idCliente);
             dgvCuentasCliente.Rows.Clear();
             foreach (DataRow row in tabla.Rows)
             {
@@ -85,7 +88,7 @@ namespace FormBancoNF.Presentacion
                 if (msg == DialogResult.Yes)
                 {
                     
-                    int resultado = helper.BajaLogica((int)dgvCuentasCliente.CurrentRow.Cells["colCodCuenta"].Value);
+                    int resultado = gestor.BajaLogicaCuenta((int)dgvCuentasCliente.CurrentRow.Cells["colCodCuenta"].Value);
                     if (resultado > 0)
                     {
                         MessageBox.Show("Se ha dado de baja la cuenta correctamente");

@@ -1,4 +1,5 @@
 ﻿
+using FormBancoNF.Negocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,36 +9,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace FormBancoNF.Presentacion
 {
     public partial class FormAlta : Form
     {
         private Cliente cliente;
-        private ConexionDB helper;
+        private GestorClientes gestor;
         public FormAlta()
         {
             InitializeComponent();
             cliente = new Cliente();
-            helper = new ConexionDB();
+            //helper = new ConexionDB();
+            gestor = new GestorClientes();
         }
 
         private void FormAlta_Load(object sender, EventArgs e)
         {
-            CargarCombo("TIPOS_CUENTAS", cbTipoCuenta, "nombre", "id_tipo_cuenta");
-            CargarCombo("SP_TIPOS_MOVIMIENTOS",cbUltimoMov,"tipo_mov","id_tipo_mov");
+            CargarComboCuentas();
+            CargarComboMovimientos();
 
         }
 
         #region PRIVATE METHODS
-        public void CargarCombo(string nombreSP,ComboBox cb,string dMember,string vMember)
-        {
-            DataTable tabla = helper.ConsultarSql(nombreSP);
+        private void CargarCombo(ComboBox cb, string dMember, string vMember,DataTable tabla) {
             cb.DataSource = tabla;
             cb.ValueMember = vMember;
             cb.DisplayMember = dMember;
         }
-
+        public void CargarComboCuentas()
+        {
+            DataTable tabla = gestor.ObtenerTiposCuenta();
+            CargarCombo(cbTipoCuenta, "nombre", "id_tipo_cuenta", tabla);
+        }
+        public void CargarComboMovimientos()
+        {
+            DataTable tabla = gestor.ObtenerTiposMovimientos();
+            CargarCombo(cbUltimoMov, "tipo_mov", "id_tipo_mov", tabla);
+        }
         private void LimpiarCuenta()
         {
             txtCbu.Text = "";
@@ -45,7 +56,7 @@ namespace FormBancoNF.Presentacion
             cbUltimoMov.SelectedValue = 1;
             cbTipoCuenta.SelectedValue = 1;
         }
-        private bool Confirmar() => helper.InsertarCliente(cliente);
+        //private bool Confirmar() => servicios.InsertarCliente(cliente);
 
 
         private void GuardarCliente()
@@ -53,7 +64,7 @@ namespace FormBancoNF.Presentacion
             cliente.Nombre = txtNombre.Text;
             cliente.Apellido = txtApellido.Text;
             cliente.Dni = Convert.ToInt32(txtDni.Text);
-            if (Confirmar())
+            if (gestor.InsertarCliente(cliente))
             {
                 //Si se agrega el cliente, se cierra el formulario para que la proxima vez que lo
                 //abramos, se vuelva a crear un objeto vacio cliente en su constructor, y llenarlo

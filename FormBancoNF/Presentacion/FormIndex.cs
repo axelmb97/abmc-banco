@@ -13,13 +13,9 @@ namespace FormBancoNF.Presentacion
 {
     public partial class FormIndex : Form
     {
-
-        private ConexionDB helper;
         public FormIndex()
         {
             InitializeComponent();
-            helper = new ConexionDB();
-
         }
         private void FormIndex_Load(object sender, EventArgs e)
         {

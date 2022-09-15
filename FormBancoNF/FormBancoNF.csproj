@@ -82,11 +82,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\AbstractDaoFactory.cs" />
     <Compile Include="Datos\ConexionDB.cs" />
+    <Compile Include="Datos\DaoFactory.cs" />
+    <Compile Include="Datos\HelperDB.cs" />
+    <Compile Include="Datos\Implementaciones\ClientesDao.cs" />
+    <Compile Include="Datos\Interfaces\IClientesDao.cs" />
     <Compile Include="Dominio\Cliente.cs" />
     <Compile Include="Dominio\Cuenta.cs" />
     <Compile Include="Dominio\Parametro.cs" />
     <Compile Include="Dominio\TipoCuenta.cs" />
+    <Compile Include="Negocios\GestorClientes.cs" />
+    <Compile Include="Negocios\IServicios.cs" />
     <Compile Include="Presentacion\FormAlta.cs">
       <SubType>Form</SubType>
     </Compile>

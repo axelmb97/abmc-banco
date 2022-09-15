@@ -8,16 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FormBancoNF.Negocios;
 using FormBancoNF.Reportes.DatosR;
 namespace FormBancoNF.Presentacion
 {
     public partial class FormReportes : Form
     {
-        private ConexionDB helper;
+
+        private GestorClientes gestor;
         public FormReportes()
         {
             InitializeComponent();
-            helper = new ConexionDB();
+            gestor = new GestorClientes();
         }
 
         private void FormReportes_Load(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace FormBancoNF.Presentacion
                 return;
             }
             DataTable tabla = new DataTable();
-            tabla = helper.ReporteAgrupado("SP_REPORTE_CLIENTES_SALDOS",Convert.ToDouble(txtMonto.Text));
+            tabla = gestor.ClientesConMontosMayores(Convert.ToDouble(txtMonto.Text));
 
             this.rvClientes.LocalReport.DataSources.Clear();
             //Se pone el nombre de la tabla creada en el archivo Report1.rdlc

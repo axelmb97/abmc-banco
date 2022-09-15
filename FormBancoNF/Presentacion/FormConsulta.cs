@@ -1,5 +1,6 @@
 ﻿
 using FormBancoNF.Dominio;
+using FormBancoNF.Negocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,11 @@ namespace FormBancoNF.Presentacion
 {
     public partial class FormConsulta : Form
     {
-        private ConexionDB helper;
+        private GestorClientes gestor;
         public FormConsulta()
         {
             InitializeComponent();
-            helper = new ConexionDB();
+            gestor = new GestorClientes();
         }
 
         private void FormConsulta_Load(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace FormBancoNF.Presentacion
         #region PRIVATE METHODS
         private void CargarLista()
         {
-            DataTable tabla = ckbCuentasBajas.Checked ? helper.ConsultarSql("DATOS_CLIENTES_Y_BAJAS") : helper.ConsultarSql("DATOS_CLIENTES");
+            DataTable tabla = gestor.ConsultarClientes(ckbCuentasBajas.Checked);
 
             dgvClientes.Rows.Clear();
             foreach (DataRow row in tabla.Rows)
@@ -70,19 +71,27 @@ namespace FormBancoNF.Presentacion
             }
             if (dgvClientes.CurrentCell.ColumnIndex == 6)
             {
-                string cliente = dgvClientes.CurrentRow.Cells["colApellido"].Value.ToString();
-                DialogResult msg = MessageBox.Show($"Esta seguro que desea dar de baja a {cliente}","Confirmacion",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes) {
-
-                    int resultado = helper.EliminarCuenta((int)dgvClientes.CurrentRow.Cells["colId"].Value);
-                    if (resultado > 0)
+                if (dgvClientes.CurrentRow.Cells["colFechaBaja"].Value.ToString() == "")
+                {
+                    string cliente = dgvClientes.CurrentRow.Cells["colApellido"].Value.ToString();
+                    DialogResult msg = MessageBox.Show($"Esta seguro que desea dar de baja a {cliente}", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (msg == DialogResult.Yes)
                     {
-                        MessageBox.Show("Cliente correctamente dado de baja");
+
+                        int resultado = gestor.BajaLogicaCliente((int)dgvClientes.CurrentRow.Cells["colId"].Value);
+                        if (resultado > 0)
+                        {
+                            MessageBox.Show("Cliente correctamente dado de baja");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Hubo incovenientes al dar de baja este usuario.Intente de nuevo");
+                        }
+                        CargarLista();
                     }
-                    else {
-                        MessageBox.Show("Hubo incovenientes al dar de baja este usuario.Intente de nuevo");
-                    }
-                    CargarLista();
+                }
+                else {
+                    MessageBox.Show("Este usuario ya esta dado de baja","Informacion",MessageBoxButtons.OK,MessageBoxIcon.None);
                 }
             }
         }

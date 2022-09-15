@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FormBancoNF
 {
-    internal class Cliente
+    public class Cliente
     {
         private int idCliente;
         private string nombre;
@@ -48,7 +48,8 @@ namespace FormBancoNF
             set { dni = value; }
             get { return dni; }
         }
-        public List<Cuenta> Cuentas {
+        public List<Cuenta> Cuentas
+        {
             
             get { return cuentas; }
         }

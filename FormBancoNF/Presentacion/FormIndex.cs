@@ -1,4 +1,5 @@
 ﻿
+using FormBancoNF.PilasYColas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -113,5 +114,10 @@ namespace FormBancoNF.Presentacion
 
         #endregion
 
+        private void pilasColasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPilasColas nuevo = new FormPilasColas();
+            nuevo.ShowDialog();
+        }
     }
 }

@@ -69,3 +69,4 @@ C:\Users\Usuario\source\repos\FormBancoNF\FormBancoNF\bin\Debug\zh-CHT\Microsoft
 C:\Users\Usuario\source\repos\FormBancoNF\FormBancoNF\obj\Debug\FormBancoNF.Presentacion.FormReportes.resources
 C:\Users\Usuario\source\repos\FormBancoNF\FormBancoNF\obj\Debug\FormBancoNF.csproj.CopyComplete
 C:\Users\Usuario\source\repos\FormBancoNF\FormBancoNF\obj\Debug\FormBancoNF.Presentacion.FormReporteDolar.resources
+C:\Users\Usuario\source\repos\FormBancoNF\FormBancoNF\obj\Debug\FormBancoNF.PilasYColas.FormPilasColas.resources

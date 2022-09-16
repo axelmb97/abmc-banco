@@ -94,6 +94,16 @@
     <Compile Include="Dominio\TipoCuenta.cs" />
     <Compile Include="Negocios\GestorClientes.cs" />
     <Compile Include="Negocios\IServicios.cs" />
+    <Compile Include="PilasYColas\Cola.cs" />
+    <Compile Include="PilasYColas\ColeccionAbstracta.cs" />
+    <Compile Include="PilasYColas\FormPilasColas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PilasYColas\FormPilasColas.Designer.cs">
+      <DependentUpon>FormPilasColas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PilasYColas\IColeccion.cs" />
+    <Compile Include="PilasYColas\Pila.cs" />
     <Compile Include="Presentacion\FormAlta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +148,9 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="PilasYColas\FormPilasColas.resx">
+      <DependentUpon>FormPilasColas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>
     </EmbeddedResource>

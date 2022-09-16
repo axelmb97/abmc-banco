@@ -37,6 +37,7 @@
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesConMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totalActivosDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pilasColasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +46,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.cLientesToolStripMenuItem,
-            this.reportesToolStripMenuItem});
+            this.reportesToolStripMenuItem,
+            this.pilasColasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -79,14 +81,14 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // consultaToolStripMenuItem
             // 
             this.consultaToolStripMenuItem.Name = "consultaToolStripMenuItem";
-            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.consultaToolStripMenuItem.Text = "Consulta";
             this.consultaToolStripMenuItem.Click += new System.EventHandler(this.consultaToolStripMenuItem_Click);
             // 
@@ -112,6 +114,13 @@
             this.totalActivosDeClientesToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.totalActivosDeClientesToolStripMenuItem.Text = "Total activos de clientes";
             this.totalActivosDeClientesToolStripMenuItem.Click += new System.EventHandler(this.totalActivosDeClientesToolStripMenuItem_Click);
+            // 
+            // pilasColasToolStripMenuItem
+            // 
+            this.pilasColasToolStripMenuItem.Name = "pilasColasToolStripMenuItem";
+            this.pilasColasToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.pilasColasToolStripMenuItem.Text = "Pilas-Colas";
+            this.pilasColasToolStripMenuItem.Click += new System.EventHandler(this.pilasColasToolStripMenuItem_Click);
             // 
             // FormIndex
             // 
@@ -141,5 +150,6 @@
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientesConMEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem totalActivosDeClientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pilasColasToolStripMenuItem;
     }
 }

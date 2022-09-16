@@ -21,10 +21,11 @@ namespace FormBancoNF.Negocios
         //capa de presentacion relacionarla con esa interfaz.De este modo la capa de presentacion no quedaria
         //pegada a ningun Objeto en especifico, sino a cualquiera que utilice la interfaz INegocios
         private IClientesDao dao;
+        //SEPARAMOS LA INTERFAZ DE LA IMPLEMENTACION
         //Poner como parametro AbstractDaoFactory
         public GestorClientes()
         {
-            dao = new ClientesDao();
+            dao = new DaoFactory().CrearClienteDao(); ;
         }
         public DataTable ConsultarClientes(bool incluirBajas)
         {
